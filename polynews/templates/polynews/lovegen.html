@@ -1,0 +1,37 @@
+{% load static %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body>
+  <div class="container">
+    <div class="row align-items-center">
+      <h1 style="margin: 1em 0;">Valentin's Day, Ask Your Love!</h1>
+      <div class="col">
+            <form method="POST" action="{% url 'lovegen' %}">
+              {% csrf_token %}
+  
+              {% bootstrap_form form %}
+          
+              {% bootstrap_button button_type="submit" content="generate link" %}
+            </form>
+            <br>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Send this url to your love</label>
+              <p><a href="
+                {% if 'http' in love_url %}
+                  {{love_url}}
+                {% else %}
+                  #
+                {% endif %}">{{love_url}}</a></p>
+            </div>
+    </div>
+  </div>
+</body>
+</html>
